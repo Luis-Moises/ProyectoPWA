@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"/>
+
+    <title>Formulario de Orden de Compra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: #8e44ad; /* Cambio a color morado */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: #ffffff; /* Cambio a color blanco */
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            margin: 20px auto;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #27ae60; /* Cambio a color verde */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218f54; /* Cambio a tono más oscuro de verde */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>
+            <img src="ruta_del_logo.png" alt="Logo">
+        </div>
+        <div>
+            <a href="ordenes.html">Ver Órdenes de Compra</a>
+            <a href="cerrar_sesion.html">Cerrar Sesión</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Orden de Compra</h2>
+        <form>
+            <div class="form-group">
+                <label for="numeroOrden">Número de Orden de Compra:</label>
+                <input type="text" id="numeroOrden" name="numeroOrden">
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion">
+            </div>
+            <div class="form-group">
+                <label for="cliente">Cliente:</label>
+                <input type="text" id="cliente" name="cliente">
+            </div>
+            <div class="form-group">
+                <label for="precioSinIVA">Precio sin IVA:</label>
+                <input type="text" id="precioSinIVA" name="precioSinIVA">
+            </div>
+            <div class="form-group">
+                <label for="precioConIVA">Precio con IVA:</label>
+                <input type="text" id="precioConIVA" name="precioConIVA">
+            </div>
+            <input type="submit" value="Guardar">
+        </form>
+    </div>
+
+    <script src="serviceWorker.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
