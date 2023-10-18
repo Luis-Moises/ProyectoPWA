@@ -1,9 +1,12 @@
 const staticGestionOrdenes= "dev-gestionOrdenes-site-v1"
 
 const assets= [
-    "/",
-    "/index.html",
-    "/app.js",
+    "./",
+    "./views/inicio.ejs",
+    "./registroServiceWorker.js",
+    "./app.js",
+    
+
 ]
 
 async function preCache() {
