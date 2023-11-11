@@ -6,24 +6,28 @@
     <link rel="manifest" href="manifest.json"/>
     <script src="registroServiceWorker.js"></script>
 
-
     <title>Formulario de Orden de Compra</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
+            background-color: #f2f2f2; /* Color de fondo */
         }
 
         .navbar {
-            background-color: #8e44ad; /* Cambio a color morado */
+            background-color: #8e44ad;
             padding: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
+        .navbar img {
+            max-width: 100px; /* Ajustar el ancho del logo */
+        }
+
         .navbar a {
-            color: #ffffff; /* Cambio a color blanco */
+            color: #ffffff;
             text-decoration: none;
             margin: 0 10px;
         }
@@ -33,12 +37,13 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            width: 400px;
+            width: 80%;
+            max-width: 600px; /* Ajustar el ancho máximo de la tarjeta */
             margin: 20px auto;
         }
 
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         label {
@@ -47,24 +52,30 @@
             margin-bottom: 5px;
         }
 
-        input[type="text"] {
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
         }
 
         input[type="submit"] {
-            background-color: #27ae60; /* Cambio a color verde */
+            background-color: #27ae60;
             color: #fff;
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
             cursor: pointer;
+            font-size: 16px; /* Ajustar el tamaño del texto */
         }
 
         input[type="submit"]:hover {
-            background-color: #218f54; /* Cambio a tono más oscuro de verde */
+            background-color: #218f54;
         }
     </style>
 </head>
@@ -81,28 +92,53 @@
 
     <div class="card">
         <h2>Orden de Compra</h2>
-        <form>
+        <form class="form" action="/registrarOrden" method="post">
             <div class="form-group">
-                <label for="numeroOrden">Número de Orden de Compra:</label>
-                <input type="text" id="numeroOrden" name="numeroOrden">
+                <label for="cliente">CLIENTE:</label>
+                <input type="number" id="cliente" name="cliente">
             </div>
             <div class="form-group">
-                <label for="descripcion">Descripción:</label>
+                <label for="nOrden">NUMERO DE ORDEN:</label>
+                <input type="number" id="nOrden" name="nOrden">
+            </div>
+            <div class="form-group">
+                <label for="fIngreso">FECHA DE INGRESO</label>
+                <input type="date" id="fIngreso" name="fIngreso">
+            </div>
+            <div class="form-group">
+                <label for="descripcion">DESCRIPCION:</label>
                 <input type="text" id="descripcion" name="descripcion">
             </div>
             <div class="form-group">
-                <label for="cliente">Cliente:</label>
-                <input type="text" id="cliente" name="cliente">
+                <label for="fEntrega">FECHA DE ENTREGA ESTIMADA:</label>
+                <input type="date" id="fEntrega" name="fEntrega">
             </div>
             <div class="form-group">
-                <label for="precioSinIVA">Precio sin IVA:</label>
-                <input type="text" id="precioSinIVA" name="precioSinIVA">
+                <label for="notas">NOTAS:</label>
+                <input type="text" id="notas" name="notas">
             </div>
             <div class="form-group">
-                <label for="precioConIVA">Precio con IVA:</label>
-                <input type="text" id="precioConIVA" name="precioConIVA">
+                <label for="responsables">RESPONABLES:</label>
+                <input type="text" id="responsables" name="responsables">
             </div>
-            <input type="submit" value="Guardar">
+            <div class="form-group">
+                <label for="fEntregaReal">FECHA DE ENTREGA REAL:</label>
+                <input type="date" id="fEntregaReal" name="fEntregaReal">
+            </div>
+            <div class="form-group">
+                <label for="tDiseño">TIEMPO DE DISEÑO:</label>
+                <input type="text" id="tDiseño" name="tDiseño">
+            </div>
+            <div class="form-group">
+                <label for="tProduccion">TIEMPO DE PRODUCCIÓN:</label>
+                <input type="text" id="tProduccion" name="tProduccion">
+            </div>
+            <div class="form-group">
+                <label for="tMaquila">TIEMPO DE MAQUILA:</label>
+                <input type="text" id="tMaquila" name="tMaquila">
+            </div>
+            <button type="submit" class="btn">Guardar Orden</button>        
+
         </form>
     </div>
 
