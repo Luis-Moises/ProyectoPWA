@@ -1,5 +1,5 @@
 module.exports={
     mongodb:{
-        URI:'mongodb://0.0.0.0:27017/appDisenarte'
+        URI:'mongodb+srv://moi:moi@cluster0.5ivmefe.mongodb.net/?retryWrites=true&w=majority'
     }
 } 
