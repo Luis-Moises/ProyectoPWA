@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Notificaciones con JavaScript</title>
+</head>
+<body>
+
+<button onclick="mostrarNotificacion()">Mostrar Notificación</button>
+
+<script>
+function mostrarNotificacion() {
+  if (!("Notification" in window)) {
+    alert("Tu navegador no soporta notificaciones");
+  } else {
+    Notification.requestPermission().then(function(permission) {
+      if (permission === "granted") {
+        var notification = new Notification("¡Hola!", {
+          body: "¡Esta es una notificación de ejemplo!"
+        });
+      } else {
+        console.log("El usuario no permitió las notificaciones");
+      }
+    });
+  }
+}
+</script>
+
+</body>
+</html>
+

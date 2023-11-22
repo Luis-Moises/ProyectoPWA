@@ -7,10 +7,14 @@ const Orden = require('../models/orden');
 router.get('/',(req,res,next)=>{
     res.render('inicio');
 });
+router.get('/noti',(req,res,next)=>{
+    res.render('noti');
+});
 
 router.post('/registrarOrden', (req, res, next)=>{
     const{cliente,nOrden,fIngreso,descripcion,fEntrega,responsables,fEntregaReal,tDiseño,tProduccion,tMaquila,notas}=req.body;
-    const newRegistro = new Orden({cliente,nOrden,fIngreso,descripcion,fEntrega,responsables,fEntregaReal,tDiseño,tProduccion,tMaquila,notas})
+    const newRegistro = new Orden({cliente,nOrden,fIngreso,descripcion,fEntrega,responsables,fEntregaReal,tDiseño,tProduccion,tMaquila,notas});
+  
     newRegistro.save();
     res.render('inicio');
 })

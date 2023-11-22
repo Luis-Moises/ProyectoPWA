@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json"/>
     <script src="registroServiceWorker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.8/push.min.js" integrity="sha512-eiqtDDb4GUVCSqOSOTz/s/eiU4B31GrdSb17aPAA4Lv/Cjc8o+hnDvuNkgXhSI5yHuDvYkuojMaQmrB5JB31XQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Formulario de Orden de Compra</title>
     <style>
         body {
@@ -87,9 +86,39 @@
         <div>
             <a href="ordenes.html">Ver Órdenes de Compra</a>
             <a href="cerrar_sesion.html">Cerrar Sesión</a>
+            <button onclick="solicitarPermisosNotificacion()">Solicitar Notificaciones</button>
+
         </div>
     </div>
+     
+    
+    <script>
+        function solicitarPermisosNotificacion() {
+            if (!("Notification" in window)) {
+                alert("Tu navegador no soporta notificaciones");
+            } else {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === "granted") {
+                        mostrarNotificacion();
+                    } else {
+                        console.log("El usuario no permitió las notificaciones");
+                    }
+                });
+            }
+        }
 
+        function mostrarNotificacion() {
+            var notification = new Notification("Solicitud de notificaciones", {
+                body: "Ahora recibirás notificaciones sobre tus órdenes."
+            });
+        }
+
+        function enviarOrden() {
+            var notification = new Notification("Orden nueva", {
+                body: "Acabas de gurardadr una nueva orden de compra."
+            });
+        }
+    </script>
     <div class="card">
         <h2>Orden de Compra</h2>
         <form class="form" action="/registrarOrden" method="post">
@@ -137,41 +166,12 @@
                 <label for="tMaquila">TIEMPO DE MAQUILA:</label>
                 <input type="text" id="tMaquila" name="tMaquila">
             </div>
-            <button type="submit" class="btn" onclick="push();">Guardar Orden</button>        
+            <button onclick="enviarOrden()" type="submit" class="btn">Guardar Orden</button>        
 
         </form>
     </div>
-<script>
-    function push(){
-
-Push.Permission.request();
-
-Push.create('ORDEN NUEVA', {
-
-body: 'SE GUARDO CORRECTAMENTE LA ORDEN EN TU LISTA',
-
-icon: "https://w7.pngwing.com/pngs/21/106/png-transparent-check-mark-graphy-computer-icons-others-angle-leaf-photography.png",
-
-timeout: 1500000,              
-
-vibrate: [100, 100, 100],    
-
-onClick: function() {
-
    
 
-    window.location="https://google.es";
-
-
-
-    console.log(this);
-
-}  
-
-});
-
-}
-</script>
     <script src="serviceWorker.js"></script>
 </body>
 </html>
