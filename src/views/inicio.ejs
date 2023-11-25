@@ -186,19 +186,35 @@
     </div>
    
 <script>
-    const fileInput = document.getElementById('fileInput');
+const openCameraButton = document.getElementById('openCamera');
+const fileInput = document.getElementById('fileInput');
 const preview = document.getElementById('preview');
 
-fileInput.addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      preview.src = event.target.result;
-    };
-    reader.readAsDataURL(file);
+openCameraButton.addEventListener('click', async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    // Aquí puedes mostrar la cámara en un elemento <video> si quieres
+    fileInput.style.display = 'block';
+    openCameraButton.style.display = 'none';
+
+    fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          preview.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Cuando el usuario cierra la cámara
+    stream.getTracks().forEach(track => track.stop());
+  } catch (error) {
+    console.error('Se denegó el acceso a la cámara:', error);
   }
 });
+
 
 </script>
     <script src="serviceWorker.js"></script>
