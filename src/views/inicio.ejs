@@ -76,7 +76,14 @@
         input[type="submit"]:hover {
             background-color: #218f54;
         }
+        
     </style>
+     <style>
+        #preview {
+          width: 300px;
+          height: auto;
+        }
+      </style>
 </head>
 <body>
     <div class="navbar">
@@ -130,7 +137,12 @@
                 <label for="nOrden">NUMERO DE ORDEN:</label>
                 <input type="number" id="nOrden" name="nOrden">
             </div>
-            <div class="form-group">
+            <div>
+                <label for="nOrden">IMAGEN DE LA ORDEN:</label>
+                <input type="file" accept="image/*" capture="camera" id="fileInput">
+                <img src="" id="preview" alt="Vista previa de la imagen">
+            </div>
+            <div class="form-group mt-3">
                 <label for="fIngreso">FECHA DE INGRESO</label>
                 <input type="date" id="fIngreso" name="fIngreso">
             </div>
@@ -162,16 +174,33 @@
                 <label for="tProduccion">TIEMPO DE PRODUCCIÓN:</label>
                 <input type="text" id="tProduccion" name="tProduccion">
             </div>
+          
             <div class="form-group">
                 <label for="tMaquila">TIEMPO DE MAQUILA:</label>
                 <input type="text" id="tMaquila" name="tMaquila">
             </div>
-            <button onclick="enviarOrden()" type="submit" class="btn">Guardar Orden</button>        
+           
+            <button onclick="enviarOrden()" type="submit" class="btn">Guardar Orden</button>    
 
         </form>
     </div>
    
+<script>
+    const fileInput = document.getElementById('fileInput');
+const preview = document.getElementById('preview');
 
+fileInput.addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      preview.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+</script>
     <script src="serviceWorker.js"></script>
 </body>
 </html>
