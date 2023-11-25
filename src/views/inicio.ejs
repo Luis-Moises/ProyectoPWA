@@ -139,9 +139,8 @@
             </div>
             <div>
                 <label for="nOrden">IMAGEN DE LA ORDEN:</label>
-                    <button id="openCamera">Abrir cámara</button>
-    <input type="file" accept="image/*" id="fileInput" style="display: none;">
-    <img src="" id="preview" alt="Vista previa de la imagen">
+                <input type="file" accept="image/*" capture="camera" id="fileInput">
+                <img src="" id="preview" alt="Vista previa de la imagen">
             </div>
             <div class="form-group mt-3">
                 <label for="fIngreso">FECHA DE INGRESO</label>
@@ -187,35 +186,53 @@
     </div>
    
 <script>
-const openCameraButton = document.getElementById('openCamera');
 const fileInput = document.getElementById('fileInput');
 const preview = document.getElementById('preview');
 
-openCameraButton.addEventListener('click', async () => {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    // Aquí puedes mostrar la cámara en un elemento <video> si quieres
-    fileInput.style.display = 'block';
-    openCameraButton.style.display = 'none';
-
-    fileInput.addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          preview.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Cuando el usuario cierra la cámara
-    stream.getTracks().forEach(track => track.stop());
-  } catch (error) {
-    console.error('Se denegó el acceso a la cámara:', error);
+fileInput.addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      preview.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 });
 
+
+</script>
+
+<script>
+    // Verificación del soporte de la API getUserMedia
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Solicitar acceso a la cámara
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            console.log('Acceso a la cámara concedido');
+            // Aquí podrías hacer algo con el stream, si lo necesitas
+        })
+        .catch(function(error) {
+            console.error('Acceso a la cámara denegado:', error);
+        });
+} else {
+    console.error('getUserMedia no es compatible con este navegador');
+}
+
+
+if ('Notification' in window) {
+    Notification.requestPermission()
+        .then(function(permission) {
+            if (permission === 'granted') {
+                console.log('Permiso para notificaciones concedido');
+                // Aquí podrías enviar notificaciones
+            } else {
+                console.warn('Permiso para notificaciones denegado');
+            }
+        });
+} else {
+    console.error('Las notificaciones no son compatibles con este navegador');
+}
 
 </script>
     <script src="serviceWorker.js"></script>
